@@ -1,3 +1,10 @@
+import localFont from "next/font/local";
+
+const europaGrotesk = localFont({
+  src: "./fonts/EuropaGroteskSH-MedIta.otf", // adjust if different
+  display: "swap",
+});
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -17,7 +24,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={classNames(inter.className, "overflow-hidden")}>
+      <body className={classNames(europaGrotesk.className, "overflow-hidden")}>
         {children}
       </body>
     </html>
