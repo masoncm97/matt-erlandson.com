@@ -16,7 +16,7 @@ export default function Scroll({ side }: { side: 'left' | 'right' }) {
 
   return (
     <div
-      className="no-scrollbar overflow-y-auto h-screen"
+      className="no-scrollbar overflow-y-auto h-[100svh]"
       style={{
         scrollSnapType: "y mandatory",
         scrollPaddingTop: "100vh",
@@ -26,7 +26,7 @@ export default function Scroll({ side }: { side: 'left' | 'right' }) {
         if (scrollTop < 0) e.currentTarget.scrollTop = 0; // Prevent scrolling up
       }}
     >
-      <div className="h-screen flex items-end">
+      <div className="h-[100svh] flex items-end">
         {/* Main image always aligned at bottom */}
         <CldImage
           src={images[side].main}
@@ -38,16 +38,17 @@ export default function Scroll({ side }: { side: 'left' | 'right' }) {
       </div>
       {/* Other images below */}
       <div>
-        {images[side].secondary.map((src, index) => (
-          <CldImage
-            key={src}
-            src={src}
-            loading="eager"
-            width={1870}
-            height={1250}
-            alt={`sample ${index + 1}`}
-          />
-        ))}
+      {images[side].secondary.map((src, index) => (
+  <CldImage
+    key={src}
+    src={src}
+    loading="lazy"
+    width={1870}
+    height={1250}
+    alt={`sample ${index + 1}`}
+    format={["shirt-loop1_s4ctrz", "posters2_u3hgo4"].includes(src) ? "gif" : undefined}
+  />
+))}
       </div>
     </div>
   );
