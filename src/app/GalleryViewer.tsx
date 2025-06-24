@@ -9,7 +9,11 @@ interface GalleryViewerProps {
   intervalMs?: number;
 }
 
-export default function GalleryViewer({ frames, label = "item", intervalMs = 400 }: GalleryViewerProps) {
+export default function GalleryViewer({
+  frames,
+  label = "item",
+  intervalMs = 400,
+}: GalleryViewerProps) {
   const [current, setCurrent] = useState(0);
   const [open, setOpen] = useState(false);
   const [viewIndex, setViewIndex] = useState(0);
@@ -83,7 +87,7 @@ export default function GalleryViewer({ frames, label = "item", intervalMs = 400
       {/* Expanded viewer */}
       {open && (
         <div
-          className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center"
+          className="gallery-modal-open fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center"
           onClick={() => setOpen(false)}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
