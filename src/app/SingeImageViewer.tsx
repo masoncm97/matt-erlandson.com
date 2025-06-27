@@ -5,11 +5,12 @@ import { CldImage } from "next-cloudinary";
 
 interface Props {
   src: string;
+  isVideo?: boolean;
   alt?: string;
   onClose: () => void;
 }
 
-export default function SingleImageViewer({ src, alt = "Artwork", onClose }: Props) {
+export default function SingleImageViewer({ src, isVideo = false, alt = "Artwork", onClose }: Props) {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -17,10 +18,13 @@ export default function SingleImageViewer({ src, alt = "Artwork", onClose }: Pro
       if (e.key === "Escape") onClose();
     };
 
-    // preload image
-    const img = new Image();
-    img.src = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${src}.jpg`;
-    img.onload = () => setLoaded(true);
+    if (!isVideo) {
+      const img = new Image();
+      img.src = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${src}.jpg`;
+      img.onload = () => setLoaded(true);
+    } else {
+      setLoaded(true); // assume video is ready once component mounts
+    }
 
     window.addEventListener("keydown", handleKey);
     document.body.style.overflow = "hidden";
@@ -29,7 +33,7 @@ export default function SingleImageViewer({ src, alt = "Artwork", onClose }: Pro
       window.removeEventListener("keydown", handleKey);
       document.body.style.overflow = "";
     };
-  }, [src, onClose]);
+  }, [src, onClose, isVideo]);
 
   if (!loaded) return null;
 
@@ -42,18 +46,25 @@ export default function SingleImageViewer({ src, alt = "Artwork", onClose }: Pro
         className="relative w-full max-w-4xl px-4"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Clicking image will close it */}
         <div onClick={onClose} className="cursor-pointer">
-          <CldImage
-            src={src}
-            width={1870}
-            height={1250}
-            alt={alt}
-            className="w-full h-auto"
-          />
+          {isVideo ? (
+            <video
+              src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/video/upload/${src}.mp4`}
+              controls
+              autoPlay
+              className="w-full h-auto"
+            />
+          ) : (
+            <CldImage
+              src={src}
+              width={1870}
+              height={1250}
+              alt={alt}
+              className="w-full h-auto"
+            />
+          )}
         </div>
 
-        {/* Close Icon */}
         <div
           className="absolute top-4 right-4 cursor-pointer w-6 h-6"
           onClick={onClose}

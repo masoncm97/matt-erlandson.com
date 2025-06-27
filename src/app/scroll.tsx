@@ -8,6 +8,7 @@ import SingleImageViewer from "./SingeImageViewer";
 
 export default function Scroll({ side }: { side: "left" | "right" }) {
   const [expanded, setExpanded] = useState<string | null>(null);
+  const [isVideo, setIsVideo] = useState(false);
 
   const images = {
     left: {
@@ -15,6 +16,7 @@ export default function Scroll({ side }: { side: "left" | "right" }) {
       secondary: [
         "shirt-loop1_s4ctrz",
         "Damn_that_sucks_raxgdy",
+        "video_driftloop1_htgfkm",
         "Redbud_mebkwm"
       ]
     },
@@ -24,6 +26,7 @@ export default function Scroll({ side }: { side: "left" | "right" }) {
         "Gun_cg4z1b",
         "posters2_u3hgo4",
         "Rockaway_nasmqf",
+        "video_driftloop2_qnfvwq",
         "201_Salsa_vwiynf"
       ]
     }
@@ -61,19 +64,38 @@ export default function Scroll({ side }: { side: "left" | "right" }) {
               return <PosterGallery key="poster-gallery" />;
             }
 
+            const isVideoThumb = src.startsWith("video_");
+
             return (
               <div
                 key={src}
-                onClick={() => setExpanded(src)}
+                onClick={() => {
+                  setExpanded(src);
+                  setIsVideo(isVideoThumb);
+                }}
                 className="cursor-pointer"
               >
-                <CldImage
-                  src={src}
-                  loading="lazy"
-                  width={1870}
-                  height={1250}
-                  alt={`sample ${index + 1}`}
-                />
+                {isVideoThumb ? (
+                  <div className="border-x-[140px] border-y-[60px] border-white">
+                    <video
+                      src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/video/upload/${src}.mp4`}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload="none"
+                      className="w-full h-auto"
+                    />
+                  </div>
+                ) : (
+                  <CldImage
+                    src={src}
+                    loading="lazy"
+                    width={1870}
+                    height={1250}
+                    alt={`sample ${index + 1}`}
+                  />
+                )}
               </div>
             );
           })}
@@ -83,6 +105,7 @@ export default function Scroll({ side }: { side: "left" | "right" }) {
       {expanded && (
         <SingleImageViewer
           src={expanded}
+          isVideo={isVideo}
           alt="Expanded view"
           onClose={() => setExpanded(null)}
         />
