@@ -35,7 +35,7 @@ export default function Scroll({ side }: { side: "left" | "right" }) {
   return (
     <>
       <div
-        className="no-scrollbar overflow-y-auto h-[100svh]"
+        className="no-scrollbar overflow-y-auto overflow-x-hidden h-[100svh]"
         style={{
           scrollSnapType: "y mandatory",
           scrollPaddingTop: "100vh",
@@ -76,7 +76,7 @@ export default function Scroll({ side }: { side: "left" | "right" }) {
                 className="cursor-pointer"
               >
                 {isVideoThumb ? (
-                  <div className="border-x-[140px] border-y-[60px] border-white">
+                  <div className="border-x-[150px] border-y-[60px] border-white w-full min-h-[300px]">
                     <video
                       src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/video/upload/${src}.mp4`}
                       autoPlay
