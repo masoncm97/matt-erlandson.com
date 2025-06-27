@@ -76,14 +76,14 @@ export default function Scroll({ side }: { side: "left" | "right" }) {
                 className="cursor-pointer"
               >
                 {isVideoThumb ? (
-                  <div className="border-x-[150px] border-y-[60px] border-white w-full min-h-[300px]">
+                  <div className="border-x-[150px] border-y-[60px] border-white w-full">
                     <video
                       src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/video/upload/${src}.mp4`}
                       autoPlay
                       muted
                       loop
                       playsInline
-                      preload="none"
+                      preload="metadata"
                       className="w-full h-auto"
                     />
                   </div>
