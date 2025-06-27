@@ -76,17 +76,17 @@ export default function Scroll({ side }: { side: "left" | "right" }) {
                 className="cursor-pointer"
               >
                 {isVideoThumb ? (
-                  <div className="border-x-[150px] border-y-[60px] border-white w-full">
+                  <div className="w-full border-white border-x-[20px] border-y-[10px] md:border-x-[150px] md:border-y-[60px]">
                     <video
-                      src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/video/upload/${src}.mp4`}
-                      poster={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${src}.jpg`}
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      preload="metadata"
-                      className="w-full h-auto"
-                    />
+  src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/video/upload/${src}.mp4`}
+  poster={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${src}.jpg`}
+  autoPlay
+  muted
+  loop
+  playsInline
+  preload="metadata"
+  className="w-full h-auto"
+/>
                   </div>
                 ) : (
                   <CldImage
