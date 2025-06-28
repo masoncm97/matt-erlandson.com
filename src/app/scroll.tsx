@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CldImage } from "next-cloudinary";
 import ShirtGallery from "./ShirtGallery";
 import PosterGallery from "./PosterGallery";
@@ -31,6 +31,27 @@ export default function Scroll({ side }: { side: "left" | "right" }) {
       ]
     }
   };
+
+  // Auto-resume videos when tab becomes visible again
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        const videos = document.querySelectorAll("video");
+        videos.forEach((video) => {
+          if (video.paused) {
+            video.play().catch(() => {
+              // Some browsers may block autoplay
+            });
+          }
+        });
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
 
   return (
     <>
@@ -78,15 +99,15 @@ export default function Scroll({ side }: { side: "left" | "right" }) {
                 {isVideoThumb ? (
                   <div className="w-full border-white border-x-[20px] border-y-[10px] md:border-x-[150px] md:border-y-[60px]">
                     <video
-  src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/video/upload/${src}.mp4`}
-  poster={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${src}.jpg`}
-  autoPlay
-  muted
-  loop
-  playsInline
-  preload="metadata"
-  className="w-full h-auto"
-/>
+                      src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/video/upload/${src}.mp4`}
+                      poster={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${src}.jpg`}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                      className="w-full h-auto"
+                    />
                   </div>
                 ) : (
                   <CldImage
