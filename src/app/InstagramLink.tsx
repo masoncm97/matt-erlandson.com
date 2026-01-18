@@ -19,7 +19,7 @@ export default function InstagramLink() {
 
   return (
     <a
-      href="https://www.instagram.com/matterlandson/"
+      href="https://www.instagram.com/dogvisi0n/"
       target="_blank"
       rel="noopener noreferrer"
       className={`fixed top-4 right-4 z-40 w-8 h-8 sm:w-6 sm:h-6 transition-opacity duration-300 ${
