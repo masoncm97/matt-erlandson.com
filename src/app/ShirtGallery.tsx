@@ -3,6 +3,7 @@ import GalleryViewer from "./GalleryViewer";
 const shirtFrames = [
   "shirt_1_ulf5va",
   "shirt_2_a3ewwb",
+  "shooks_soviet_shirt_ggiigh",
   "shirt_3_upaccj",
   "shirt_4_v440dm",
   "shirt_5_q3s0ai",
