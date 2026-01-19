@@ -15,7 +15,7 @@ const europaGrotesk = localFont({
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Matt Erlandson",
+  title: "Portfolio",
   description: "Selected Works",
 };
 
