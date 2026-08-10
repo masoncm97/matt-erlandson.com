@@ -9,7 +9,7 @@ export default function FlashPage() {
   // ✅ FULL URLs (recommended: f_auto,q_auto). Do NOT force .jpg/.png.
   const imageUrls = useMemo(
     () => [
-      "https://res.cloudinary.com/djvtbj1os/image/upload/v1786359225/flash_block_8102026_iwns7h",
+      "https://res.cloudinary.com/djvtbj1os/image/upload/v1786388078/flash_block_8102026_iwns7h",
       "https://res.cloudinary.com/djvtbj1os/image/upload/v1768758254/flash_block_1_w3rmxi",
       "https://res.cloudinary.com/djvtbj1os/image/upload/v1768758252/flash_block_2_liikyk",
       "https://res.cloudinary.com/djvtbj1os/image/upload/v1768758253/flashblock_3_qm2kwt"
